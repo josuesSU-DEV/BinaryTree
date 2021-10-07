@@ -83,7 +83,7 @@ class BinaryTree{
             return false;
         }
         T getPadre(T value){
-            if(!this->m_pRoot||!findIterative(value)||value==this->m_pRoot->value)return -1;
+            if(!this->m_pRoot||value==-1||value==this->m_pRoot->value)return -1;
             Node<T>*pAux=this->m_pRoot;
             Node<T>*pAuxAntes;
             while(pAux){
@@ -91,17 +91,26 @@ class BinaryTree{
                 pAux=pAux->m_pSon[pAux->value<value];
                 if(pAux->value==value)return pAuxAntes->value;
             }
+            return -1;
         }
         T getHermano(T value){
-            if(!this->m_pRoot||!findIterative(value)||value==this->m_pRoot->value)return -1;
+            if(!this->m_pRoot||value==-1||value==this->m_pRoot->value)return -1;
             Node<T>*pAux=this->m_pRoot;
-            //Node<T>*pAuxAntes;
+            
             while(pAux){
-                //pAuxAntes=pAux;
-                //pAux=pAux->m_pSon[pAux->value<value];
-                if(pAux->m_pSon[pAux->value<value]->value==value && pAux->m_pSon[pAux->value>value])return pAux->m_pSon[pAux->value>value]->value;
-                if(!pAux->m_pSon[pAux->value>value]) return -1;
+                if(pAux->m_pSon[pAux->value<value]->value==value && pAux->m_pSon[pAux->value>value]){
+                    return pAux->m_pSon[pAux->value>value]->value;
+                
+                }
+                else if(!pAux->m_pSon[pAux->value>value]&& pAux->m_pSon[pAux->value<value]->value==value) return -1;
                 pAux=pAux->m_pSon[pAux->value<value];
             }
+            return -1;
+        }
+        T getTio(T value){
+            return getHermano(getPadre(value));
+        }
+        T getAbuelo(T value){
+            return getPadre(getPadre(value));
         }
 };
