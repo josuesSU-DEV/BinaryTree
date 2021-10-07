@@ -72,7 +72,7 @@ class BinaryTree{
             else findRecursive(value,pAux->m_pSon[pAux->value<value]);
         }
         bool findRecursive(T value){
-            findRecursive(value,this->m_pRoot);
+            return findRecursive(value,this->m_pRoot);
         }
         bool findIterative(T value){
             Node<T>*pAux=this->m_pRoot;
